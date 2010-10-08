@@ -7,12 +7,14 @@ It is built on the idea that memory store is the most efficient store with no ne
 ## Installation
 
 The order of the arguments are defining the layers, where the first ones are on the lowest/closest levels.  
-`ActionController::Base.cache_store = Layercake::Store.new(:memory_store, :mem_cache_store => ['localhost', 11211])`
+Add this in your application.rb (Rails 3 anyway)  
+`config.cache_store = Layercake::Store.new(:memory_store, :mem_cache_store => 'localhost:11211')`  
+(localhost:11211 is default, and not really necessary to specify)
 
-Use it like you would normally use any cache store.
-`Rails.cache.fetch`
-`Rails.cache.write`
-`Rails.cache.read`
+Use it like you would normally use any cache store.  
+`Rails.cache.fetch
+Rails.cache.write
+Rails.cache.read`  
 all the options given will be passed on to the individual cache stores
 
 ## Tests
