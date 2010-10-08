@@ -7,7 +7,7 @@ It is built on the idea that memory store is the most efficient store with no ne
 ## Installation
 
 The order of the arguments are defining the layers, where the first ones are on the lowest/closest levels.  
-`ActionController::Base.cache_store = LayerCake.new(:memory_store, :mem_cache_store => ['localhost', 11211])`
+`ActionController::Base.cache_store = Layercake::Store.new(:memory_store, :mem_cache_store => ['localhost', 11211])`
 
 Use it like you would normally use any cache store.
 `Rails.cache.fetch`
