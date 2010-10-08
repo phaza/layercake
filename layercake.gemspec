@@ -24,6 +24,7 @@ It is built on the idea that memory store is the most efficient store with no ne
      "README.markdown",
      "Rakefile",
      "VERSION",
+     "layercake.gemspec",
      "lib/layercake.rb",
      "lib/layercake/store.rb",
      "test/helper.rb",
