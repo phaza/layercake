@@ -42,7 +42,7 @@ module Layercake
       @stores.each do |store|
         value = store.send(:read_entry, key, options)
         unless value.nil?
-          Rails.logger.debug "Read from: #{store.class}"
+          # Rails.logger.debug "Read from: #{store.class}"
           break
         end
         
