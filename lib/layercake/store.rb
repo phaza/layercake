@@ -40,7 +40,8 @@ module Layercake
       missed = []
       
       @stores.each do |store|
-        value = store.send(:read_entry, key, options)
+        method = choose_method(store, :read_entry, :read)
+        value = store.send(method, key, options)
         unless value.nil?
           # Rails.logger.debug "Read from: #{store.class}"
           break
@@ -51,7 +52,8 @@ module Layercake
       
       if value
         missed.each do |store|
-          store.send(:write_entry, key, value, options)
+          method = choose_method(store, :write_entry, :write)
+          store.send(method, key, value, options)
         end
       end
       
@@ -59,17 +61,28 @@ module Layercake
     end
     
     def write_entry(key, entry, options)
-      @stores.each{|store| store.send(:write_entry, key, entry, options) }
+      @stores.each do |store| 
+        method = choose_method(store, :write_entry, :write)
+        store.send(method, key, entry, options)
+      end
       true
     end
     
     def delete_entry(key, options)
       @stores.map do |store|
-        store.send(:delete_entry, key, options)
+        method = choose_method(store, :delete_entry, :delete)
+        store.send(method, key, options)
       end.include? true
     end
     
     private
+    
+    def choose_method(store, method1, method2)
+      return method1 if store.respond_to? method1.to_sym
+      return method2 if store.respond_to? method2.to_sym
+      nil
+    end
+    
     def initialize_store(arg)
       parameters = arg
       *parameters = *[arg.keys.first, arg.values].flatten if arg.is_a?(Hash)
