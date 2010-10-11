@@ -4,12 +4,15 @@ module Layercake
     attr_reader :stores
     
     def initialize(*args)
-      super()
+      options = args.extract_options!
+      super(options)
+      
       @stores = []
       
       args.each do |arg|
         initialize_store(arg)
       end
+      
     end
     
     
@@ -83,11 +86,8 @@ module Layercake
       nil
     end
     
-    def initialize_store(arg)
-      parameters = arg
-      *parameters = *[arg.keys.first, arg.values].flatten if arg.is_a?(Hash)
-      
-      stores << ActiveSupport::Cache.lookup_store(parameters)
+    def initialize_store(arg)      
+      stores << ActiveSupport::Cache.lookup_store(arg)
     end
     
   end
