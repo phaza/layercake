@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{layercake}
-  s.version = "0.1.2"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Peter Haza"]
-  s.date = %q{2010-10-08}
+  s.date = %q{2010-10-11}
   s.description = %q{LayerCake is a simple gem that allows you to specify more than one cache store in rails.  
 It is built on the idea that memory store is the most efficient store with no network or file overhead, but serves multi-process or multi-server architectures, hence a fallback like filestore or memcached store is necessary.}
   s.email = %q{peter.haza@gmail.com}
